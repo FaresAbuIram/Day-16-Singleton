@@ -30,7 +30,10 @@ public class MainForm extends JFrame {
             public void actionPerformed(ActionEvent ae) {
                 showNewCalender();
             }
+
+
         });
+
 
         JButton b2 = new JButton("Show Calender 2"); // Button 2 (Create Calender 2)
         b2.addActionListener(new ActionListener() {
@@ -38,6 +41,7 @@ public class MainForm extends JFrame {
                 showNewCalender();
             }
         });
+
 
 
         JPanel panel = new JPanel();
@@ -52,8 +56,19 @@ public class MainForm extends JFrame {
      * Create and show new calender object
      * Todo: This method logs the object HashCode in a text file, after refactoring the code; show warning message if the HashCode of Calender1 doesn't equal Calender2 HashCode
      */
+    static int s;//to restore the first one hashcode inside it
+    boolean is = true;//to do something just one time
     private void showNewCalender() {
-        SwingCalendar sc = new SwingCalendar();
+        SwingCalendar sc =SwingCalendar.getInstance();
+        if(is){
+            s=sc.hashCode();
+            is=false;
+        }
+
+        if(s!=sc.hashCode())
+            System.out.println("The HashCode of Calender1 doesn't equal Calender2 HashCode");
+
+
         Util.Logger.log("Object HC: " + sc.hashCode()); // Log Calender hash code
     }
 
